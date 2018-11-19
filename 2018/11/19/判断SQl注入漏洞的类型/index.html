@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2018/11 | Seekx</title>
+  <title>判断SQl注入类å漏æ漏洞的类型 | Seekx</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -59,7 +59,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -167,78 +167,99 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/11/19/判断SQl注入漏洞的类型/">判断SQl注入类å漏æ漏洞的类型</a></h4>
-                            
-                            <p><time datetime="2018-11-19T12:09:21.000Z"><a href="/2018/11/19/判断SQl注入漏洞的类型/">2018-11-19</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2018/11/19/专业单词/">专业单词</a></h4>
-                            
-                            <p><time datetime="2018-11-19T08:12:50.000Z"><a href="/2018/11/19/专业单词/">2018-11-19</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2018-11-19T12:09:21.000Z" itemprop="datePublished">
+          2018-11-19
+      </time>
+    
+</span>
+                <h1>判断SQl注入类å漏æ漏洞的类型</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<pre><code>判断sql注入漏洞的类型
+</code></pre><p>通常 Sql 注入漏洞分为 2 种类型：<br>•    数字型<br>•    字符型<br>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分常用的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
+<p>5.2.1 数字型判断：<br>当输入的参 x 为整型时，通常 abc.php 中 Sql 语句类型大致如下：<br>select * from &lt;表名&gt; where id = x<br>这种类型可以使用经典的 and 1=1 和 and 1=2 来判断：<br>•    </p>
+<ol>
+<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=1 页面依旧运行正常，继续进行下一步。<br>•    </li>
+<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=2 页面运行错误，则说明此 Sql 注入为数字型注入。<br>原因如下：<br>当输入 and 1=1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = x and 1=1<br>没有语法错误且逻辑判断为正确，所以返回正常。<br>当输入 and 1=2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = x and 1=2<br>没有语法错误但是逻辑判断为假，所以返回错误。<br>我们再使用假设法：如果这是字符型注入的话，我们输入以上语句之后应该出现如下情况：</li>
+<li>select * from &lt;表名&gt; where id = ‘x and 1=1’ </li>
+<li>select <em> from &lt;表名&gt; where id = ‘x and 1=2’<br>查询语句将 and 语句全部转换为了字符串，并没有进行 and 的逻辑判断，所以不会出现以上结果，故假设是不成立的。<br>5.2.2 字符型判断：<br>当输入的参 x 为字符型时，通常 abc.php 中 SQL 语句类型大致如下：<br>select </em> from &lt;表名&gt; where id = ‘x’<br>这种类型我们同样可以使用 and ‘1’=’1 和 and ‘1’=’2来判断：<br>•    </li>
+<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’1 页面运行正常，继续进行下一步<br>•    </li>
+<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：<br>当输入 and ‘1’=’1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’2’<br>语法正确，但逻辑判断错误，所以返回正确。同样可以使用假设法来验证。</li>
+</ol>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
+    
+    
+    <a class="pull-right" href="/2018/11/19/专业单词/">
+        专业单词 →
+    </a>
+    
+</nav>
+
+        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
+  /**
+   * 搜狐畅言
+   */
+
+  /*
+  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+
+  window.onload = function () {
+    (function () {
+      var appid = 'cytXXXX';
+      var conf = 'prod_xxxxxxxxxxxxxxxxx';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      var loadJs = function (d, a, id) {
+        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+        var b = document.createElement("script");
+        b.setAttribute("type", "text/javascript");
+        b.setAttribute("charset", "UTF-8");
+        b.setAttribute("src", d);
+        if (id) {
+          b.setAttribute("id", id);
+        }
+        if (typeof a === "function") {
+          if (window.attachEvent) {
+            b.onreadystatechange = function () {
+              var e = b.readyState;
+              if (e === "loaded" || e === "complete") {
+                b.onreadystatechange = null;
+                a()
+              }
+            }
+          } else {
+            b.onload = a
+          }
+        }
+        c.appendChild(b)
+      };
+
+      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+        window.changyan.api.config({
+          appid: appid,
+          conf: conf
+        })
+      });
+    })();
+  }
+  */
+
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
