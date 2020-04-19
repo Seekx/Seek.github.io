@@ -5,13 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title> - Seekx</title>
+    <title>csrf - Seekx</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="shentou,"> 
-    <meta name="description" content="Seekx,%%:uuid=200419174757001
-CSRF一、CSRF是什么：CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”,"> 
+    <meta name="description" content="Seekx,CSRF一、CSRF是什么：CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CS,"> 
     <meta name="author" content="Seekx"> 
     <link rel="alternative" href="atom.xml" title="Seekx" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -37,7 +36,7 @@ CSRF一、CSRF是什么：CSRF（Cross-site request forgery）跨站请求伪造
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="Seekx"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle"></h3>
+    <h3 class="subtitle">csrf</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -52,15 +51,14 @@ CSRF一、CSRF是什么：CSRF（Cross-site request forgery）跨站请求伪造
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title"></h1>
+        <h1 class="title">csrf</h1>
         <div class="stuff">
             <span>四月 19, 2020</span>
             
 
         </div>
         <div class="content markdown">
-            <p>%%:uuid=200419174757001</p>
-<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
+            <h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
 <p>二、CSRF攻击攻击原理及过程如下：<br> 1、用户打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A；<br>2、在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A；<br> 3、用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问恶意网站B；<br> 4、恶意网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A；<br>5、浏览器在接收到这些攻击性代码后，根据恶意网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户的Cookie信息以用户的权限处理该请求，导致来自网站B的恶意代码被执行，这就是CSRF攻击。</p>
 <p>三、举一个CSRF攻击的例子：<br>例子实验来自合天网安实验室：<br>此网页为留言板网页用户已登录账户密码admin 123456，输入插入留言板内容。</p>
 <p><img src="C:\Users\seek\Desktop\博客文章\1.png" width="1064" height="455" border="0" alt=""></p>
