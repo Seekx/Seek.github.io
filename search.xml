@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>一次渗透总结</title>
-    <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-  </entry>
-  <entry>
     <title>csrf</title>
     <url>/2020/04/19/csrf/</url>
     <content><![CDATA[<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
@@ -24,31 +16,20 @@
 ]]></content>
   </entry>
   <entry>
+    <title>一次渗透总结</title>
+    <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+  </entry>
+  <entry>
     <title>专业单词</title>
     <url>/2018/11/19/%E4%B8%93%E4%B8%9A%E5%8D%95%E8%AF%8D/</url>
     <content><![CDATA[<p>asp（动态服务器页面）<br>ASP即Active Server Pages，是MicroSoft公司开发的服务器端脚本环境，可用来创建动态交互式网页并建立强大的web应用程序。当服务器收到对ASP文件的请求时，它会处理包含在用于构建发送给浏览器的HTML（Hyper Text Markup Language，超文本置标语言）网页文件中的服务器端脚本代码。除服务器端脚本代码外，ASP文件也可以包含文本、HTML（包括相关的客户端脚本）和com组件调用。 [1-2]<br>ASP简单、易于维护 ， 是小型页面应用程序的选择 ，在使用DCOM （Distributed Component Object Model）和 MTS（Microsoft Transaction Server）的情况下， ASP甚至可以实现中等规模的企业应用程序。 [3]<br>中文名<br>动态服务器页面<br>外文名<br>Active Server Pages</p>
 <p>78<br>WEB服务器<br> 锁定<br>本词条由“科普中国”百科科学词条编写与应用工作项目 审核 。<br>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档， [1]  也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载。目前最主流的三个Web服务器是Apache Nginx IIS。</p>
 <p>收藏<br>2005<br>160<br>webshell<br> 编辑<br>webshell就是以asp、php、jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称做为一种网页后门。黑客在入侵了一个网站后，通常会将asp或php后门文件与网站服务器WEB目录下正常的网页文件混在一起，然后就可以使用浏览器来访问asp或者php后门，得到一个命令执行环境，以达到控制网站服务器的目的。<br>顾名思义，“web”的含义是显然需要服务器开放web服务，“shell”的含义是取得对服务器某种程度上操作权限。webshell常常被称为入侵者通过网站端口对网站服务器的某种程度上操作的权限。由于webshell其大多是以动态脚本的形式出现，也有人称之为网站的后门工具。</p>
 <p>GLOBALS<br>PHP全局变量</p>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>判断SQl注入类漏洞的类型</title>
-    <url>/2018/11/19/%E5%88%A4%E6%96%ADSQl%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<pre><code>判断sql注入漏洞的类型
-</code></pre><p>通常 Sql 注入漏洞分为 2 种类型：<br>•    数字型<br>•    字符型<br>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分常用的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
-<p>5.2.1 数字型判断：<br>当输入的参 x 为整型时，通常 abc.php 中 Sql 语句类型大致如下：<br>select * from &lt;表名&gt; where id = x<br>这种类型可以使用经典的 and 1=1 和 and 1=2 来判断：<br>•    </p>
-<ol>
-<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=1 页面依旧运行正常，继续进行下一步。<br>•    </li>
-<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=2 页面运行错误，则说明此 Sql 注入为数字型注入。<br>原因如下：<br>当输入 and 1=1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = x and 1=1<br>没有语法错误且逻辑判断为正确，所以返回正常。<br>当输入 and 1=2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = x and 1=2<br>没有语法错误但是逻辑判断为假，所以返回错误。<br>我们再使用假设法：如果这是字符型注入的话，我们输入以上语句之后应该出现如下情况：</li>
-<li>select * from &lt;表名&gt; where id = ‘x and 1=1’ </li>
-<li>select <em> from &lt;表名&gt; where id = ‘x and 1=2’<br>查询语句将 and 语句全部转换为了字符串，并没有进行 and 的逻辑判断，所以不会出现以上结果，故假设是不成立的。<br>5.2.2 字符型判断：<br>当输入的参 x 为字符型时，通常 abc.php 中 SQL 语句类型大致如下：<br>select </em> from &lt;表名&gt; where id = ‘x’<br>这种类型我们同样可以使用 and ‘1’=’1 和 and ‘1’=’2来判断：<br>•    </li>
-<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’1 页面运行正常，继续进行下一步<br>•    </li>
-<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：<br>当输入 and ‘1’=’1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’2’<br>语法正确，但逻辑判断错误，所以返回正确。同样可以使用假设法来验证。</li>
-</ol>
 ]]></content>
       <categories>
         <category>学习</category>
