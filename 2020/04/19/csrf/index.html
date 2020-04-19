@@ -61,8 +61,8 @@
             <h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
 <p>二、CSRF攻击攻击原理及过程如下：<br> 1、用户打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A；<br>2、在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A；<br> 3、用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问恶意网站B；<br> 4、恶意网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A；<br>5、浏览器在接收到这些攻击性代码后，根据恶意网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户的Cookie信息以用户的权限处理该请求，导致来自网站B的恶意代码被执行，这就是CSRF攻击。</p>
 <p>三、举一个CSRF攻击的例子：<br>例子实验来自合天网安实验室：<br>此网页为留言板网页用户已登录账户密码admin 123456，输入插入留言板内容。</p>
-<p><img src="/Seekx/2020/04//Users\seek\Desktop\博客文章\1.png" width="1064" height="455" border="0" alt=""></p>
-<p>按F12进入调试点network中的preserve log 抓取流量包。点击add抓取<br><img src="/Seekx/2020/04//Users\seek\Desktop\博客文章\2.png" width="1247" height="461" border="0" alt=""></p>
+<p><img src="/Seekx/2020/04//blong\PortableHexo\hexo\source\_posts\csrf\1.png" width="1064" height="455" border="0" alt=""></p>
+<p>按F12进入调试点network中的preserve log 抓取流量包。点击add抓取<br><img src="/Seekx/2020/04//blong\PortableHexo\hexo\source\_posts\csrf\1.png" width="1247" height="461" border="0" alt=""></p>
 <p>此数据包的在添加留言是附带了cookie的值 这个攻击者留下了可利用的漏洞，同时网页的请求为GET请求。<br><img src="/Seekx/2020/04//Users\seek\Desktop\博客文章\3.png" width="545" height="826" border="0" alt=""><br><img src="/Seekx/2020/04//Users\seek\Desktop\博客文章\4.png" width="1216" height="581" border="0" alt=""><br>然后我们新建标签页，用浏览器访问咱们已经构造好的恶意网站。网站看起来跟正常网站一样但是其实他已经在后台执行了脚本，利用了网站的cookie。</p>
 <p><img src="/Seekx/2020/04//Users\seek\Desktop\博客文章\5.png" width="899" height="643" border="0" alt=""></p>
 <p>然后我们访问我们留言板的网站，看看发生了什么变化。</p>
