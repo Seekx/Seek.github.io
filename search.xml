@@ -19,6 +19,9 @@
     <title>一次渗透总结</title>
     <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
   </entry>
   <entry>
     <title>专业单词</title>
@@ -28,6 +31,9 @@
 <p>收藏<br>2005<br>160<br>webshell<br> 编辑<br>webshell就是以asp、php、jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称做为一种网页后门。黑客在入侵了一个网站后，通常会将asp或php后门文件与网站服务器WEB目录下正常的网页文件混在一起，然后就可以使用浏览器来访问asp或者php后门，得到一个命令执行环境，以达到控制网站服务器的目的。<br>顾名思义，“web”的含义是显然需要服务器开放web服务，“shell”的含义是取得对服务器某种程度上操作权限。webshell常常被称为入侵者通过网站端口对网站服务器的某种程度上操作的权限。由于webshell其大多是以动态脚本的形式出现，也有人称之为网站的后门工具。</p>
 <p>GLOBALS<br>PHP全局变量</p>
 ]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
   </entry>
   <entry>
     <title>判断SQl注入类漏洞的类型</title>
@@ -44,5 +50,8 @@
 <li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：<br>当输入 and ‘1’=’1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’2’<br>语法正确，但逻辑判断错误，所以返回正确。同样可以使用假设法来验证。</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
   </entry>
 </search>
