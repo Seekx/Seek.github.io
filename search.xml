@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2020/04/19/csrf/</url>
-    <content><![CDATA[<p>%%:uuid=200419174757001</p>
-<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
-<p>二、CSRF攻击攻击原理及过程如下：<br> 1、用户打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A；<br>2、在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A；<br> 3、用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问恶意网站B；<br> 4、恶意网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A；<br>5、浏览器在接收到这些攻击性代码后，根据恶意网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户的Cookie信息以用户的权限处理该请求，导致来自网站B的恶意代码被执行，这就是CSRF攻击。</p>
-<p>三、举一个CSRF攻击的例子：<br>例子实验来自合天网安实验室：<br>此网页为留言板网页用户已登录账户密码admin 123456，输入插入留言板内容。</p>
-<p><img src="C:\Users\seek\Desktop\博客文章\1.png" width="1064" height="455" border="0" alt=""></p>
-<p>按F12进入调试点network中的preserve log 抓取流量包。点击add抓取<br><img src="C:\Users\seek\Desktop\博客文章\2.png" width="1247" height="461" border="0" alt=""></p>
-<p>此数据包的在添加留言是附带了cookie的值 这个攻击者留下了可利用的漏洞，同时网页的请求为GET请求。<br><img src="C:\Users\seek\Desktop\博客文章\3.png" width="545" height="826" border="0" alt=""><br><img src="C:\Users\seek\Desktop\博客文章\4.png" width="1216" height="581" border="0" alt=""><br>然后我们新建标签页，用浏览器访问咱们已经构造好的恶意网站。网站看起来跟正常网站一样但是其实他已经在后台执行了脚本，利用了网站的cookie。</p>
-<p><img src="C:\Users\seek\Desktop\博客文章\5.png" width="899" height="643" border="0" alt=""></p>
-<p>然后我们访问我们留言板的网站，看看发生了什么变化。</p>
-<p><img src="C:\Users\seek\Desktop\博客文章\6.png" width="997" height="467" border="0" alt=""><br>看到留言版中增加我们构造脚本的内容，我们看看恶意代码是怎样构成的。<br><img src="C:\Users\seek\Desktop\博客文章\7.png" width="975" height="398" border="0" alt=""><br>网页中增加了一个img标签，他用代码隐藏了，使我们无法看到标签内容，这个标签通过设置src地址，向留言板网站发送了一条恶意留言请求。由于浏览器保存了我们在留言板网站的身份标识Cookie，并在发送请求时自动将Cookie附带上，所以恶意网站就成功盗用了我们的身份，完成了一次恶意留言行为，这就是基于 GET请求的CSRF攻击全过程。当然还有POST请求的CSRF攻击。基本的CSRF的概念就是这样。</p>
-<p>四、如何防御CSRF有以下几点：<br>1、提交验证码<br>2、验证HTTP头的Referer<br>3、token验证<br>4、在HTTP头中自己定义属性并验证</p>
-]]></content>
-  </entry>
-  <entry>
     <title>一次渗透总结</title>
     <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>专业单词</title>
+    <url>/2018/11/19/%E4%B8%93%E4%B8%9A%E5%8D%95%E8%AF%8D/</url>
+    <content><![CDATA[<p>asp（动态服务器页面）<br>ASP即Active Server Pages，是MicroSoft公司开发的服务器端脚本环境，可用来创建动态交互式网页并建立强大的web应用程序。当服务器收到对ASP文件的请求时，它会处理包含在用于构建发送给浏览器的HTML（Hyper Text Markup Language，超文本置标语言）网页文件中的服务器端脚本代码。除服务器端脚本代码外，ASP文件也可以包含文本、HTML（包括相关的客户端脚本）和com组件调用。 [1-2]<br>ASP简单、易于维护 ， 是小型页面应用程序的选择 ，在使用DCOM （Distributed Component Object Model）和 MTS（Microsoft Transaction Server）的情况下， ASP甚至可以实现中等规模的企业应用程序。 [3]<br>中文名<br>动态服务器页面<br>外文名<br>Active Server Pages</p>
+<p>78<br>WEB服务器<br> 锁定<br>本词条由“科普中国”百科科学词条编写与应用工作项目 审核 。<br>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档， [1]  也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载。目前最主流的三个Web服务器是Apache Nginx IIS。</p>
+<p>收藏<br>2005<br>160<br>webshell<br> 编辑<br>webshell就是以asp、php、jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称做为一种网页后门。黑客在入侵了一个网站后，通常会将asp或php后门文件与网站服务器WEB目录下正常的网页文件混在一起，然后就可以使用浏览器来访问asp或者php后门，得到一个命令执行环境，以达到控制网站服务器的目的。<br>顾名思义，“web”的含义是显然需要服务器开放web服务，“shell”的含义是取得对服务器某种程度上操作权限。webshell常常被称为入侵者通过网站端口对网站服务器的某种程度上操作的权限。由于webshell其大多是以动态脚本的形式出现，也有人称之为网站的后门工具。</p>
+<p>GLOBALS<br>PHP全局变量</p>
+]]></content>
   </entry>
   <entry>
     <title>判断SQl注入类漏洞的类型</title>
@@ -35,15 +28,6 @@
 <li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’1 页面运行正常，继续进行下一步<br>•    </li>
 <li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：<br>当输入 and ‘1’=’1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’2’<br>语法正确，但逻辑判断错误，所以返回正确。同样可以使用假设法来验证。</li>
 </ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>专业单词</title>
-    <url>/2018/11/19/%E4%B8%93%E4%B8%9A%E5%8D%95%E8%AF%8D/</url>
-    <content><![CDATA[<p>asp（动态服务器页面）<br>ASP即Active Server Pages，是MicroSoft公司开发的服务器端脚本环境，可用来创建动态交互式网页并建立强大的web应用程序。当服务器收到对ASP文件的请求时，它会处理包含在用于构建发送给浏览器的HTML（Hyper Text Markup Language，超文本置标语言）网页文件中的服务器端脚本代码。除服务器端脚本代码外，ASP文件也可以包含文本、HTML（包括相关的客户端脚本）和com组件调用。 [1-2]<br>ASP简单、易于维护 ， 是小型页面应用程序的选择 ，在使用DCOM （Distributed Component Object Model）和 MTS（Microsoft Transaction Server）的情况下， ASP甚至可以实现中等规模的企业应用程序。 [3]<br>中文名<br>动态服务器页面<br>外文名<br>Active Server Pages</p>
-<p>78<br>WEB服务器<br> 锁定<br>本词条由“科普中国”百科科学词条编写与应用工作项目 审核 。<br>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档， [1]  也可以放置网站文件，让全世界浏览；可以放置数据文件，让全世界下载。目前最主流的三个Web服务器是Apache Nginx IIS。</p>
-<p>收藏<br>2005<br>160<br>webshell<br> 编辑<br>webshell就是以asp、php、jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称做为一种网页后门。黑客在入侵了一个网站后，通常会将asp或php后门文件与网站服务器WEB目录下正常的网页文件混在一起，然后就可以使用浏览器来访问asp或者php后门，得到一个命令执行环境，以达到控制网站服务器的目的。<br>顾名思义，“web”的含义是显然需要服务器开放web服务，“shell”的含义是取得对服务器某种程度上操作权限。webshell常常被称为入侵者通过网站端口对网站服务器的某种程度上操作的权限。由于webshell其大多是以动态脚本的形式出现，也有人称之为网站的后门工具。</p>
-<p>GLOBALS<br>PHP全局变量</p>
 ]]></content>
   </entry>
 </search>
