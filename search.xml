@@ -5,16 +5,21 @@
     <url>/2020/04/19/csrf/</url>
     <content><![CDATA[<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a><strong>CSRF</strong></h1><p>一、CSRF是什么：<br>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</p>
 <p>二、CSRF攻击攻击原理及过程如下：<br> 1、用户打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A；<br>2、在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A；<br> 3、用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问恶意网站B；<br> 4、恶意网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A；<br>5、浏览器在接收到这些攻击性代码后，根据恶意网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户的Cookie信息以用户的权限处理该请求，导致来自网站B的恶意代码被执行，这就是CSRF攻击。</p>
-<p>三、举一个CSRF攻击的例子：<br>例子实验来自合天网安实验室：<br>此网页为留言板网页用户已登录账户密码admin 123456，输入插入留言板内容。</p>
-<p><img src="/2020/04/19/csrf/1.jpg" alt=""><br><img src="/2020/04/19/csrf/blong\PortableHexo\hexo\source\_posts\csrf\1.jpg" width="1064" height="455" border="0" alt=""></p>
-<p>按F12进入调试点network中的preserve log 抓取流量包。点击add抓取</p>
-<p>此数据包的在添加留言是附带了cookie的值 这个攻击者留下了可利用的漏洞，同时网页的请求为GET请求。</p>
-<p>然后我们新建标签页，用浏览器访问咱们已经构造好的恶意网站。网站看起来跟正常网站一样但是其实他已经在后台执行了脚本，利用了网站的cookie。</p>
-<p>然后我们访问我们留言板的网站，看看发生了什么变化。</p>
-<p>看到留言版中增加我们构造脚本的内容，我们看看恶意代码是怎样构成的。</p>
-<p>网页中增加了一个img标签，他用代码隐藏了，使我们无法看到标签内容，这个标签通过设置src地址，向留言板网站发送了一条恶意留言请求。由于浏览器保存了我们在留言板网站的身份标识Cookie，并在发送请求时自动将Cookie附带上，所以恶意网站就成功盗用了我们的身份，完成了一次恶意留言行为，这就是基于 GET请求的CSRF攻击全过程。当然还有POST请求的CSRF攻击。基本的CSRF的概念就是这样。</p>
+<p>三、举一个CSRF攻击的例子：<br>例子实验来自合天网安实验室：<br>此网页为留言板网页用户已登录账户密码admin 123456，输入插入留言板内容。<br><img src="/2020/04/19/csrf/1.png" alt="加载失败"></p>
+<p>按F12进入调试点network中的preserve log 抓取流量包。点击add抓取<br><img src="/2020/04/19/csrf/2.png" alt="加载失败"><br>此数据包的在添加留言是附带了cookie的值 这个攻击者留下了可利用的漏洞，同时网页的请求为GET请求。<br><img src="/2020/04/19/csrf/3.png" alt="加载失败"><br><img src="/2020/04/19/csrf/4.png" alt="加载失败"><br>然后我们新建标签页，用浏览器访问咱们已经构造好的恶意网站。网站看起来跟正常网站一样但是其实他已经在后台执行了脚本，利用了网站的cookie。<br><img src="/2020/04/19/csrf/5.png" alt="加载失败"></p>
+<p>然后我们访问我们留言板的网站，看看发生了什么变化。<br><img src="/2020/04/19/csrf/6.png" alt="加载失败"></p>
+<p>看到留言版中增加我们构造脚本的内容，我们看看恶意代码是怎样构成的。<br><img src="/2020/04/19/csrf/7.png" alt="加载失败"><br>网页中增加了一个img标签，他用代码隐藏了，使我们无法看到标签内容，这个标签通过设置src地址，向留言板网站发送了一条恶意留言请求。由于浏览器保存了我们在留言板网站的身份标识Cookie，并在发送请求时自动将Cookie附带上，所以恶意网站就成功盗用了我们的身份，完成了一次恶意留言行为，这就是基于 GET请求的CSRF攻击全过程。当然还有POST请求的CSRF攻击。基本的CSRF的概念就是这样。</p>
 <p>四、如何防御CSRF有以下几点：<br>1、提交验证码<br>2、验证HTTP头的Referer<br>3、token验证<br>4、在HTTP头中自己定义属性并验证</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>一次渗透总结</title>
+    <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<pre><code>一次渗透总结
+</code></pre>]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
   </entry>
   <entry>
     <title>专业单词</title>
@@ -29,9 +34,20 @@
       </categories>
   </entry>
   <entry>
-    <title>一次渗透总结</title>
-    <url>/2020/04/05/%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[]]></content>
+    <title>判断SQl注入类漏洞的类型</title>
+    <url>/2018/11/19/%E5%88%A4%E6%96%ADSQl%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<pre><code>判断sql注入漏洞的类型
+</code></pre><p>通常 Sql 注入漏洞分为 2 种类型：<br>•    数字型<br>•    字符型<br>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分常用的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
+<p>5.2.1 数字型判断：<br>当输入的参 x 为整型时，通常 abc.php 中 Sql 语句类型大致如下：<br>select * from &lt;表名&gt; where id = x<br>这种类型可以使用经典的 and 1=1 和 and 1=2 来判断：<br>•    </p>
+<ol>
+<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=1 页面依旧运行正常，继续进行下一步。<br>•    </li>
+<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x and 1=2 页面运行错误，则说明此 Sql 注入为数字型注入。<br>原因如下：<br>当输入 and 1=1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = x and 1=1<br>没有语法错误且逻辑判断为正确，所以返回正常。<br>当输入 and 1=2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = x and 1=2<br>没有语法错误但是逻辑判断为假，所以返回错误。<br>我们再使用假设法：如果这是字符型注入的话，我们输入以上语句之后应该出现如下情况：</li>
+<li>select * from &lt;表名&gt; where id = ‘x and 1=1’ </li>
+<li>select <em> from &lt;表名&gt; where id = ‘x and 1=2’<br>查询语句将 and 语句全部转换为了字符串，并没有进行 and 的逻辑判断，所以不会出现以上结果，故假设是不成立的。<br>5.2.2 字符型判断：<br>当输入的参 x 为字符型时，通常 abc.php 中 SQL 语句类型大致如下：<br>select </em> from &lt;表名&gt; where id = ‘x’<br>这种类型我们同样可以使用 and ‘1’=’1 和 and ‘1’=’2来判断：<br>•    </li>
+<li>Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’1 页面运行正常，继续进行下一步<br>•    </li>
+<li>Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="external">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。<br>原因如下：<br>当输入 and ‘1’=’1时，后台执行 Sql 语句：<br>select <em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’1’<br>语法正确，逻辑判断正确，所以返回正确。<br>当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>select </em> from &lt;表名&gt; where id = ‘x’ and ‘1’=’2’<br>语法正确，但逻辑判断错误，所以返回正确。同样可以使用假设法来验证。</li>
+</ol>
+]]></content>
       <categories>
         <category>学习</category>
       </categories>
